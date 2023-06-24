@@ -1,0 +1,23 @@
+   if request.method == 'POST':
+        form = RecordForm(request.POST or None)
+        if form.is_valid():
+            form.save(commit=False)
+            messages.success(request,"Record added...")
+            return redirect('home')
+        else:
+            print(form.errors)
+    else:
+        form = RecordForm()
+        return render(request, 'add_record.html',{'form':form})
+    
+
+
+        #created_at = forms.DateTimeField()
+        first_name = forms.CharField(max_length=50, widget=forms.TextInput(attrs={'class':'form-control', 'placeholder':'First Name'}), label="")
+        last_name = forms.CharField(max_length=50, widget=forms.TextInput(attrs={'class':'form-control', 'placeholder':'Last Name'}), label="")
+        phone = forms.CharField(max_length=50, widget=forms.TextInput(attrs={'class':'form-control', 'placeholder':'Phone'}), label="")
+        city = forms.CharField(max_length=50, widget=forms.TextInput(attrs={'class':'form-control', 'placeholder':'City'}), label="")
+        last_visit = forms.DateField(widget=forms.widgets.DateInput() ,label="Last Visit")
+        next_visit = forms.DateField(widget=forms.widgets.DateInput() ,label="Next Visit")
+        #date = forms.DateField(widget=forms.NumberInput(attrs={'type':'date'}))
+    
